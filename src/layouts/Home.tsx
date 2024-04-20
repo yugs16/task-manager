@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import CardList from '../components/Cards';
 import AddButton from '../components/AddButton';
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
 			}}
 		>
 			<AddButton></AddButton>
+			<CardList></CardList>
 		</Box>
 	);
 }
