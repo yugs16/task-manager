@@ -79,9 +79,12 @@ export default function AddTask(props: AddTaskProps) {
 				error={nameError}
 				id="outlined-name"
 				label="Name"
+				type="text"
+				name="name"
 				value={form.name}
 				helperText={nameError && 'Name should have more than 3 characters'}
 				onChange={handleChange('name')}
+				data-testid={'test-name-input'}
 			/>
 			<TextField
 				hiddenLabel
@@ -101,7 +104,11 @@ export default function AddTask(props: AddTaskProps) {
 				<Button variant="outlined" onClick={props.close}>
 					Cancel
 				</Button>
-				<Button variant="contained" onClick={() => handleSubmit(form)}>
+				<Button
+					disabled={!form.name || !!nameError}
+					variant="contained"
+					onClick={() => handleSubmit(form)}
+				>
 					Submit
 				</Button>
 			</Stack>
