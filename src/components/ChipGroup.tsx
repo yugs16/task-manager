@@ -1,16 +1,22 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { blue, green, orange } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const background = '0px 0px 4px 0px #fff;';
 
 const CustomChip = styled(Chip)(({ theme }) => {
 	return {
 		cursor: 'pointer',
+		[theme.breakpoints.down('xs')]: {
+			'&:last-child': {
+				marginBottom: '0 !important',
+			},
+		},
+		[theme.breakpoints.down('sm')]: {
+			margin: '8px !important',
+		},
 		'&:hover': {
 			background: 'rgb(255 255 255 / 10%) !important',
 			boxShadow: background,
@@ -38,7 +44,12 @@ export default function ChipGroup(props: ChipGroupProps) {
 	return (
 		<Stack
 			direction={'row'}
-			sx={{ boxSizing: 'border-box' }}
+			sx={(theme) => ({
+				boxSizing: 'border-box',
+				[theme.breakpoints.down('sm')]: {
+					display: 'block',
+				},
+			})}
 			spacing={2}
 			justifyContent={'center'}
 			marginBottom={4}

@@ -17,32 +17,6 @@ const OkMark = styled('span')`
 	color: rgb(125 200 0 / 1);
 `;
 
-const StyledInput = styled(TextField)(({ theme }) => ({
-	position: 'absolute',
-	zIndex: 1,
-	right: '1%',
-	margin: '0 auto',
-	opacity: 1,
-	backgroundColor: '#1976d2',
-	'&:hover': {
-		backgroundColor: '#1976d2',
-		opacity: 0.8,
-	},
-	[theme.breakpoints.down('sm')]: {
-		bottom: 10,
-		position: 'absolute',
-		left: 0,
-		right: 0,
-		margin: '0 auto',
-	},
-	[theme.breakpoints.up('md')]: {
-		top: 80,
-	},
-	[theme.breakpoints.up('lg')]: {
-		right: '9%',
-	},
-}));
-
 interface AddTaskProps extends AddButtonProps {
 	close: () => void;
 }
@@ -91,7 +65,6 @@ export default function AddTask(props: AddTaskProps) {
 				[theme.breakpoints.up('sm')]: {
 					width: 'auto',
 					minWidth: 400,
-					marginRight: 2,
 				},
 				[theme.breakpoints.up('lg')]: {
 					minWidth: 500,

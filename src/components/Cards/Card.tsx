@@ -21,13 +21,12 @@ import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import { updateItem } from '../../api';
 
-const CustomAccordion = styled(Accordion)(({ theme }) => {
+const CustomAccordion = styled(Accordion)(({}) => {
 	return {
 		height: '100%',
 		border: 'none',
 		marginBottom: 0,
 		boxShadow: 'none',
-		// width: 'fit-content',
 		wordBreak: 'break-word',
 		boxSizing: 'border-box',
 		fontFamily: 'Monospace',

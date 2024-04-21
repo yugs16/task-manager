@@ -27,7 +27,7 @@ export default function CardList(props: any) {
 	}
 
 	return (
-		<Grid container spacing={2} margin={3} justifyContent={'center'}>
+		<Grid container spacing={2} marginTop={2} justifyContent={'center'}>
 			<Grid
 				key={'chip-group'}
 				item

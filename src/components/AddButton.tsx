@@ -9,7 +9,6 @@ import { grey } from '@mui/material/colors';
 import AddTask from './Forms/AddTask';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ThemeProvider } from '@emotion/react';
 
 const StyledFab = styled(Fab)(({ theme }) => ({
 	position: 'absolute',
@@ -29,8 +28,8 @@ const StyledFab = styled(Fab)(({ theme }) => ({
 		right: 0,
 		margin: '0 auto',
 	},
-	[theme.breakpoints.up('md')]: {
-		top: 80,
+	[theme.breakpoints.up('sm')]: {
+		top: 100,
 	},
 	[theme.breakpoints.up('lg')]: {
 		right: '9%',
@@ -38,18 +37,11 @@ const StyledFab = styled(Fab)(({ theme }) => ({
 }));
 
 const StyledPopperDiv = styled('div')(
-	({ theme }) => css`
+	({}) => css`
 		border-radius: 8px;
-		box-shadow: ${theme.palette.mode === 'dark'
-			? `0px 4px 8px rgb(0 0 0 / 0.7)`
-			: `0px 4px 8px rgb(0 0 0 / 0.1)`};
+		box-shadow: 0px 4px 8px rgb(0 0 0 / 0.7);
 		padding: 0.75rem;
-		color: ${theme.palette.mode === 'dark' ? grey[100] : grey[100]};
-		font-size: 0.875rem;
-		font-family: 'IBM Plex Sans', sans-serif;
-		font-weight: 500;
-		opacity: 1;
-		margin: 0.25rem 0;
+		margin: 0.25rem 0.5rem;
 		width: auto;
 		background: #fff;
 	`
