@@ -1,58 +1,25 @@
 import Grid from '@mui/material/Grid';
 import Card from './Card';
+import { Task, deleteItem, getItems } from '../../api';
+import { useEffect, useState } from 'react';
 
-const heights = [
-	{
-		minHeight: 150,
-		title:
-			'1st tasksaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa pppppppppppppppppppppppppppp',
-		date: new Date().toDateString(),
-	},
-	{
-		minHeight: 150,
-		title: '1st tasksaaaaaaaa',
-		date: new Date().toDateString(),
-	},
-	{
-		minHeight: 150,
-		title: '1st tasksaaaaaaaa',
-		date: new Date().toDateString(),
-	},
-	{
-		minHeight: 150,
-		title: '1st tasksaaaaaaaa',
-		date: new Date().toDateString(),
-	},
-	{
-		minHeight: 150,
-		title: '1st tasksaaaaaaaa',
-		date: new Date().toDateString(),
-	},
-];
+export default function CardList(props: any) {
+	const [items, setItems] = useState<Task[]>([]);
+	useEffect(() => {
+		setItems(getItems());
+	}, [props.refresh]);
 
-export default function CardList() {
+	function handleDeleteItem(id: string) {
+		deleteItem(id);
+		setItems(getItems());
+	}
 	return (
-		<Grid container spacing={2} margin={3} justifyContent={'space-evenly'}>
-			{heights.map((item, index) => (
-				<Grid item>
-					<Card key={index + 1} item={item}></Card>
+		<Grid container spacing={2} margin={3} justifyContent={'center'}>
+			{items.map((item, index) => (
+				<Grid item key={index + 1}>
+					<Card item={item} handleDeleteItem={handleDeleteItem}></Card>
 				</Grid>
 			))}
 		</Grid>
 	);
 }
-
-// export default function CardList() {
-// 	return (
-// 		<Box sx={{ width: '80%', minHeight: 829 }}>
-// 			{/* <Masonry spacing={2}> */}
-// 			{heights.map((item, index) => (
-// 				<>
-// 					<CustomAccordion key={index + 1} item={item}></CustomAccordion>
-// 					{/* <SlowWidthIncreaseAccordion /> */}
-// 				</>
-// 			))}
-// 			{/* </Masonry> */}
-// 		</Box>
-// 	);
-// }

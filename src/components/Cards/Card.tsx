@@ -10,12 +10,16 @@ import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import CardActions from '@mui/material/CardActions';
 
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import Fade from '@mui/material/Fade';
 import Grow from '@mui/material/Grow';
 import { styled } from '@mui/material/styles';
+import Checkbox from '@mui/material/Checkbox';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
+import { updateItem } from '../../api';
 
 const CustomAccordion = styled(Accordion)(({ theme }) => {
 	return {
@@ -23,6 +27,9 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 		border: 'none',
 		marginBottom: 0,
 		boxShadow: 'none',
+		// width: 'fit-content',
+		wordBreak: 'break-word',
+		boxSizing: 'border-box',
 		slotProps: {
 			transition: {
 				timeout: 400,
@@ -32,12 +39,24 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 });
 
 const Card = (props: any) => {
-	const { item } = props;
+	const { item, handleDeleteItem } = props;
+	const { id, title, descp, date, status } = item;
 	const [expand, setExpand] = useState(false);
+
+	const [checked, setChecked] = useState(status === 'completed');
+
 	function handleClick() {
-		console.log('clicked', expand);
 		setExpand(!expand);
 	}
+
+	function handleDelete() {
+		handleDeleteItem(id);
+	}
+
+	const handleChange = () => {
+		updateItem(id, !checked ? 'completed' : 'pending');
+		setChecked(!checked);
+	};
 
 	let sxForPaper = {
 		transition: 'width 1s ease-in-out',
@@ -53,20 +72,23 @@ const Card = (props: any) => {
 		<Paper
 			sx={(theme) => ({
 				...sxForPaper,
+				fontFamily: 'Monospace',
+				fontSize: 'h6.fontSize',
+
 				minWidth: '250px',
 				height: expand ? '100%' : 'auto',
 				[theme.breakpoints.only('xs')]: {
-					width: '100%',
+					width: 'auto',
 				},
 			})}
 		>
 			<Stack sx={{ height: '100%' }}>
 				<CustomAccordion>
 					<AccordionSummary
-						expandIcon={<ExpandMoreIcon />}
+						expandIcon={<ExpandMoreIcon sx={{ ml: 'auto' }} />}
 						onClick={handleClick}
 					>
-						<Stack>
+						<Box>
 							<Typography component={'div'}>
 								<Box
 									sx={{
@@ -74,11 +96,13 @@ const Card = (props: any) => {
 										fontSize: 'h6.fontSize',
 									}}
 								>
-									Monospace
+									{title}
 								</Box>
 							</Typography>
-							<Typography variant="caption">{item.date}</Typography>
-						</Stack>
+							<Typography variant="caption">
+								{date ? new Date(date).toDateString() : 'In Time'}
+							</Typography>
+						</Box>
 					</AccordionSummary>
 
 					<Divider />
@@ -86,18 +110,24 @@ const Card = (props: any) => {
 					<AccordionDetails>
 						<Fade in={expand} timeout={400}>
 							<Grow in={expand} timeout={400}>
-								<div>{item.title}</div>
+								<div>{expand ? descp : ''}</div>
 							</Grow>
 						</Fade>
 					</AccordionDetails>
 				</CustomAccordion>
 
 				<Divider />
-				<CardActions disableSpacing sx={{ ml: 'auto' }}>
-					<Button aria-label="add to favorites">Mark</Button>
-					<Button variant="outlined" color="error">
-						Delete
-					</Button>
+				<CardActions disableSpacing>
+					<Checkbox checked={checked} color="success" onChange={handleChange} />
+					<Chip
+						variant="outlined"
+						color={checked ? 'success' : 'info'}
+						label={checked ? 'completed' : 'pending'}
+					/>
+
+					<IconButton color="error" sx={{ ml: 'auto' }} onClick={handleDelete}>
+						<DeleteTwoToneIcon />
+					</IconButton>
 				</CardActions>
 			</Stack>
 		</Paper>
