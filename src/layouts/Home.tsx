@@ -7,7 +7,7 @@ import Alert from '@mui/material/Alert';
 
 export default function Home() {
 	const [refresh, setRefresh] = useState(0);
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	const reFetch = () => {
 		setRefresh(refresh + 1);
