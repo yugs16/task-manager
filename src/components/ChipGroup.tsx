@@ -1,19 +1,39 @@
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { blue, green, orange } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
+
+const background = '0px 0px 4px 0px #fff;';
 
 const CustomChip = styled(Chip)(({ theme }) => {
 	return {
 		cursor: 'pointer',
+		'&:hover': {
+			background: 'rgb(255 255 255 / 10%) !important',
+			boxShadow: background,
+		},
 	};
 });
 
-export default function ChipGroup(props: any) {
-	const [active, setActive] = useState();
+interface ChipGroupProps {
+	count: Record<string, number>;
+	handleStatus: Function;
+}
 
-	const { handleStatus } = props;
+export default function ChipGroup(props: ChipGroupProps) {
+	const [active, setActive] = useState<string | undefined>();
+
+	const { handleStatus, count } = props;
+
+	useEffect(() => {});
+
+	const handleClick = (val?: string) => () => {
+		setActive(val);
+		handleStatus(val);
+	};
 
 	return (
 		<Stack
@@ -23,37 +43,38 @@ export default function ChipGroup(props: any) {
 			justifyContent={'center'}
 			marginBottom={4}
 		>
-			{/* <Button onClick={handleStatus} color="error" variant="outlined">
-				All
-			</Button>
-			<Button onClick={handleStatus('pending')} color="info" variant="outlined">
-				Pending
-			</Button>
-			<Button
-				onClick={handleStatus('completed')}
-				color="success"
-				variant="outlined"
-			>
-				Completed
-			</Button> */}
-
 			<CustomChip
-				onClick={handleStatus()}
-				label="All"
+				clickable
+				onClick={handleClick()}
+				label={`All (${count.all})`}
 				color="warning"
 				variant="outlined"
+				sx={{
+					background: !active ? orange[50] : 'inherit',
+					boxShadow: !active ? background : 'none',
+				}}
 			/>
 			<CustomChip
-				label="Pending"
+				clickable
+				label={`Pending (${count.pending})`}
 				color="info"
-				onClick={handleStatus('pending')}
+				onClick={handleClick('pending')}
 				variant="outlined"
+				sx={{
+					background: active === 'pending' ? blue[100] : 'inherit',
+					boxShadow: active === 'pending' ? background : 'none',
+				}}
 			/>
 			<CustomChip
-				label="Completed"
+				clickable
+				label={`Completed (${count.completed})`}
 				color="success"
-				onClick={handleStatus('completed')}
+				onClick={handleClick('completed')}
 				variant="outlined"
+				sx={{
+					background: active === 'completed' ? green[100] : 'inherit',
+					boxShadow: active === 'completed' ? background : 'none',
+				}}
 			/>
 		</Stack>
 	);

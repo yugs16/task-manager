@@ -40,7 +40,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 });
 
 const Card = (props: any) => {
-	const { item, handleDeleteItem } = props;
+	const { item, handleDeleteItem, handleCountOnUpdate } = props;
 	const { id, title, descp, date, status } = item;
 	const [expand, setExpand] = useState(false);
 
@@ -60,6 +60,7 @@ const Card = (props: any) => {
 
 	const handleChange = () => {
 		updateItem(id, !checked ? 'completed' : 'pending');
+		handleCountOnUpdate();
 		setChecked(!checked);
 	};
 

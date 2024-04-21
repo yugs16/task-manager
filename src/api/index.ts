@@ -46,6 +46,19 @@ function init() {
 	}
 }
 
+export function getCount() {
+	let tasks: Task[] = JSON.parse(localStorage.getItem(KEY) || '[]');
+	return {
+		all: tasks.length,
+		completed: tasks.filter((item) => {
+			return item['status' as keyof Task] === 'completed';
+		}).length,
+		pending: tasks.filter((item) => {
+			return item['status' as keyof Task] === 'pending';
+		}).length,
+	};
+}
+
 export function getItems(params?: Record<string, string>) {
 	allTasks = JSON.parse(localStorage.getItem(KEY) || '[]');
 

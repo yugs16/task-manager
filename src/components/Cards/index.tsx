@@ -1,13 +1,15 @@
 import Grid from '@mui/material/Grid';
 import Card from './Card';
-import { Task, deleteItem, getItems } from '../../api';
+import { Task, deleteItem, getCount, getItems } from '../../api';
 import { useEffect, useState } from 'react';
 import ChipGroup from '../ChipGroup';
 
 export default function CardList(props: any) {
 	const [items, setItems] = useState<Task[]>([]);
+	const [count, setCount] = useState({});
 	useEffect(() => {
 		setItems(getItems());
+		setCount(getCount());
 	}, [props.refresh]);
 
 	const handleFetchByStatus = (val: string) => () => {
@@ -17,7 +19,13 @@ export default function CardList(props: any) {
 	function handleDeleteItem(id: string) {
 		deleteItem(id);
 		setItems(getItems());
+		setCount(getCount());
 	}
+
+	function handleCountOnUpdate() {
+		setCount(getCount());
+	}
+
 	return (
 		<Grid container spacing={2} margin={3} justifyContent={'center'}>
 			<Grid
@@ -28,11 +36,15 @@ export default function CardList(props: any) {
 					textAlign: 'center',
 				}}
 			>
-				<ChipGroup handleStatus={handleFetchByStatus}></ChipGroup>
+				<ChipGroup count={count} handleStatus={handleFetchByStatus}></ChipGroup>
 			</Grid>
 			{items.map((item, index) => (
 				<Grid item key={index + 1}>
-					<Card item={item} handleDeleteItem={handleDeleteItem}></Card>
+					<Card
+						item={item}
+						handleDeleteItem={handleDeleteItem}
+						handleCountOnUpdate={handleCountOnUpdate}
+					></Card>
 				</Grid>
 			))}
 		</Grid>
