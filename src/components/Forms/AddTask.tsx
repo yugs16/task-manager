@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { AddButtonProps } from '../AddButton';
 import { addItem } from '../../api';
+import { Typography } from '@mui/material';
 
 const OkMark = styled('span')`
 	margin-left: 8px;
@@ -15,6 +16,32 @@ const OkMark = styled('span')`
 	// position: absolute;
 	color: rgb(125 200 0 / 1);
 `;
+
+const StyledInput = styled(TextField)(({ theme }) => ({
+	position: 'absolute',
+	zIndex: 1,
+	right: '1%',
+	margin: '0 auto',
+	opacity: 1,
+	backgroundColor: '#1976d2',
+	'&:hover': {
+		backgroundColor: '#1976d2',
+		opacity: 0.8,
+	},
+	[theme.breakpoints.down('sm')]: {
+		bottom: 10,
+		position: 'absolute',
+		left: 0,
+		right: 0,
+		margin: '0 auto',
+	},
+	[theme.breakpoints.up('md')]: {
+		top: 80,
+	},
+	[theme.breakpoints.up('lg')]: {
+		right: '9%',
+	},
+}));
 
 interface AddTaskProps extends AddButtonProps {
 	close: () => void;
@@ -29,7 +56,6 @@ export default function AddTask(props: AddTaskProps) {
 
 	const handleChange =
 		(key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-			console.log(event, event.target.value, event.target.labels);
 			setForm({
 				...form,
 				[key]: event.target.value,
@@ -53,11 +79,28 @@ export default function AddTask(props: AddTaskProps) {
 		props.close();
 	};
 
-	console.log(form);
 	const nameError = !!(valid.name.once && form.name.length < 4);
 
 	return (
-		<Stack spacing={2} margin={2} marginBottom={1} marginTop={1} minWidth={500}>
+		<Stack
+			spacing={2}
+			margin={2}
+			marginBottom={1}
+			marginTop={1}
+			sx={(theme) => ({
+				[theme.breakpoints.up('sm')]: {
+					width: 'auto',
+					minWidth: 400,
+					marginRight: 2,
+				},
+				[theme.breakpoints.up('lg')]: {
+					minWidth: 500,
+				},
+			})}
+		>
+			<Typography variant="h4" sx={{ opacity: 1, color: '#000' }}>
+				Add Task
+			</Typography>
 			<TextField
 				required
 				error={nameError}

@@ -1,4 +1,4 @@
-import { css, styled } from '@mui/material/styles';
+import { Theme, css, styled } from '@mui/material/styles';
 
 import AddIcon from '@mui/icons-material/Add';
 
@@ -6,8 +6,10 @@ import Fab from '@mui/material/Fab';
 import Popper from '@mui/material/Popper';
 import { useState } from 'react';
 import { grey } from '@mui/material/colors';
-import { IconButton } from '@mui/material';
 import AddTask from './Forms/AddTask';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ThemeProvider } from '@emotion/react';
 
 const StyledFab = styled(Fab)(({ theme }) => ({
 	position: 'absolute',
@@ -65,6 +67,11 @@ export default function AddButton(props: AddButtonProps) {
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popper' : undefined;
+	const isSmallScreen = useMediaQuery((theme: Theme) =>
+		theme.breakpoints.down('sm')
+	);
+
+	const popperPlacement = isSmallScreen ? 'top' : 'bottom-end';
 
 	return (
 		<>
@@ -77,7 +84,13 @@ export default function AddButton(props: AddButtonProps) {
 				<AddIcon />
 			</StyledFab>
 
-			<Popper id={id} open={open} anchorEl={anchorEl} placement={'bottom-end'}>
+			<Popper
+				id={id}
+				open={open}
+				anchorEl={anchorEl}
+				placement={popperPlacement}
+				sx={{ width: isSmallScreen ? '90%' : 'auto' }}
+			>
 				<StyledPopperDiv>
 					<AddTask
 						reFetch={props.reFetch}

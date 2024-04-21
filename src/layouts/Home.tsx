@@ -4,6 +4,7 @@ import AddButton from '../components/AddButton';
 import { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import ChipGroup from '../components/ChipGroup';
 
 export default function Home() {
 	const [refresh, setRefresh] = useState(0);

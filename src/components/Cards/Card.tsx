@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import CardActions from '@mui/material/CardActions';
 
 import Stack from '@mui/material/Stack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Fade from '@mui/material/Fade';
 import Grow from '@mui/material/Grow';
 import { styled } from '@mui/material/styles';
@@ -30,6 +30,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 		// width: 'fit-content',
 		wordBreak: 'break-word',
 		boxSizing: 'border-box',
+		fontFamily: 'Monospace',
 		slotProps: {
 			transition: {
 				timeout: 400,
@@ -44,6 +45,10 @@ const Card = (props: any) => {
 	const [expand, setExpand] = useState(false);
 
 	const [checked, setChecked] = useState(status === 'completed');
+
+	useEffect(() => {
+		setChecked(status === 'completed');
+	}, [status]);
 
 	function handleClick() {
 		setExpand(!expand);
@@ -72,7 +77,6 @@ const Card = (props: any) => {
 		<Paper
 			sx={(theme) => ({
 				...sxForPaper,
-				fontFamily: 'Monospace',
 				fontSize: 'h6.fontSize',
 
 				minWidth: '250px',
@@ -92,7 +96,6 @@ const Card = (props: any) => {
 							<Typography component={'div'}>
 								<Box
 									sx={{
-										fontFamily: 'Monospace',
 										fontSize: 'h6.fontSize',
 									}}
 								>
