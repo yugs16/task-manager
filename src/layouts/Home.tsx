@@ -39,11 +39,12 @@ export default function Home() {
 			</Box>
 			<Snackbar
 				open={open}
+				autoHideDuration={3000}
 				anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
 				onClose={handleClose}
 			>
 				<Alert severity="success" variant="filled">
-					One task added successfully
+					One task added successfully!!
 				</Alert>
 			</Snackbar>
 		</>
