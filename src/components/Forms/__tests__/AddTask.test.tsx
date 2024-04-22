@@ -8,10 +8,6 @@ const defaultProps = {
 	close: () => {},
 };
 
-beforeEach(() => {
-	vi.resetModules();
-});
-
 describe('AddTask component', () => {
 	beforeEach(() => {
 		vi.resetModules();
@@ -80,9 +76,12 @@ describe('AddTask component', () => {
 		const nameInput = within(
 			await screen.findByTestId('test-name-input')
 		).getByRole('textbox');
-		userEvent.type(nameInput, 'new_task');
 
-		const descpInput = screen.getByPlaceholderText('Type some details here...');
+		await userEvent.type(nameInput, 'new_task');
+
+		const descpInput = await screen.findByPlaceholderText(
+			'Type some details here...'
+		);
 
 		userEvent.type(descpInput, 'details');
 

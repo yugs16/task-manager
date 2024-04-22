@@ -23,7 +23,7 @@ const StyledFab = styled(Fab)(({ theme }) => ({
 	},
 	[theme.breakpoints.down('sm')]: {
 		bottom: 10,
-		position: 'absolute',
+		position: 'fixed',
 		left: 0,
 		right: 0,
 		margin: '0 auto',
