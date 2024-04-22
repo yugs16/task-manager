@@ -111,9 +111,9 @@ const Card = (props: any) => {
 					<Divider />
 
 					<AccordionDetails>
-						<Fade in={expand} timeout={400}>
-							<Grow in={expand} timeout={400}>
-								<div>{expand ? descp : ''}</div>
+						<Fade in={expand} timeout={1000}>
+							<Grow in={expand} timeout={1000}>
+								<div>{descp}</div>
 							</Grow>
 						</Fade>
 					</AccordionDetails>

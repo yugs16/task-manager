@@ -26,10 +26,10 @@ const CustomChip = styled(Chip)(({ theme }) => {
 
 interface ChipGroupProps {
 	count: Record<string, number>;
-	handleStatus: Function;
+	handleStatus: (val?: string) => void;
 }
 
-export default function ChipGroup(props: ChipGroupProps) {
+export default function ChipGroup(props: any) {
 	const [active, setActive] = useState<string | undefined>();
 
 	const { handleStatus, count } = props;
@@ -37,8 +37,9 @@ export default function ChipGroup(props: ChipGroupProps) {
 	useEffect(() => {});
 
 	const handleClick = (val?: string) => () => {
-		setActive(val);
 		handleStatus(val);
+
+		// setActive(val);
 	};
 
 	return (

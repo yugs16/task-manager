@@ -12,7 +12,8 @@ export default function CardList(props: any) {
 		setCount(getCount());
 	}, [props.refresh]);
 
-	const handleFetchByStatus = (val: string) => () => {
+	const handleFetchByStatus = (val: string) => {
+		console.log('sasajksajksa');
 		setItems([...getItems(val ? { status: val } : {})]);
 	};
 
