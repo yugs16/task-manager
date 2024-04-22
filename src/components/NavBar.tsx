@@ -13,42 +13,18 @@ function NavBar() {
 		<AppBar position="static">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+					<AdbIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
 					<Typography
 						variant="h6"
 						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
 						sx={{
 							mr: 2,
-							display: { xs: 'none', md: 'flex' },
+
 							fontFamily: 'monospace',
 							fontWeight: 700,
 							color: 'inherit',
 							letterSpacing: '.3rem',
 
-							textDecoration: 'none',
-						}}
-					>
-						LOGO
-					</Typography>
-					<Box sx={{ widht: 20, height: 20 }}>
-						<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-					</Box>
-
-					<Typography
-						variant="h5"
-						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
-						sx={{
-							mr: 2,
-							display: { xs: 'flex', md: 'none' },
-							flexGrow: 1,
-							fontFamily: 'monospace',
-							fontWeight: 700,
-							letterSpacing: '.3rem',
-							color: 'inherit',
 							textDecoration: 'none',
 						}}
 					>

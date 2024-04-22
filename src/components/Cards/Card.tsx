@@ -66,11 +66,11 @@ const Card = (props: any) => {
 	let sxForPaper = {
 		transition: 'width 1s ease-in-out',
 		overflow: 'hidden',
-		width: '250px',
+		width: 'auto',
 	};
 
 	if (expand) {
-		sxForPaper = { ...sxForPaper, width: '500px !important' };
+		sxForPaper = { ...sxForPaper };
 	}
 
 	return (
@@ -78,11 +78,17 @@ const Card = (props: any) => {
 			sx={(theme) => ({
 				...sxForPaper,
 				fontSize: 'h6.fontSize',
-
 				minWidth: '250px',
 				height: expand ? '100%' : 'auto',
-				[theme.breakpoints.only('xs')]: {
-					width: 'auto',
+				[theme.breakpoints.down('sm')]: {
+					width: '100%',
+					marginRight: 2,
+				},
+				[theme.breakpoints.up('sm')]: {
+					width: expand ? '400px !important' : '250px',
+				},
+				[theme.breakpoints.up('sm')]: {
+					width: expand ? '500px !important' : '250px',
 				},
 			})}
 		>

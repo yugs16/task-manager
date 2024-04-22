@@ -12,7 +12,7 @@ export default function CardList(props: any) {
 		setCount(getCount());
 	}, [props.refresh]);
 
-	const handleFetchByStatus = (val: string) => {
+	const handleFetchByStatus = (val?: string) => {
 		console.log('sasajksajksa');
 		setItems([...getItems(val ? { status: val } : {})]);
 	};
@@ -32,8 +32,10 @@ export default function CardList(props: any) {
 			container
 			spacing={2}
 			marginTop={2}
+			margin={4}
 			justifyContent={'center'}
 			data-testid={'card-list'}
+			marginLeft={{ xs: 2, sm: 4 }}
 		>
 			<Grid
 				key={'chip-group'}
@@ -46,7 +48,7 @@ export default function CardList(props: any) {
 				<ChipGroup count={count} handleStatus={handleFetchByStatus}></ChipGroup>
 			</Grid>
 			{items.map((item, index) => (
-				<Grid item key={index + 1}>
+				<Grid item key={index + 1} xs={12} sm={'auto'}>
 					<Card
 						item={item}
 						handleDeleteItem={handleDeleteItem}
