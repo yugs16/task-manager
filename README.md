@@ -9,7 +9,7 @@ After the clone, follow :
 - `npm i`
 - `npm run dev`
 
-### Tests by vite-ui
+### Tests by vitest-ui
 - For tests in terminal use, `npm run test`
 - For test preview use `npm run test-preview`
 
