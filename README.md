@@ -1,5 +1,5 @@
 # Task Manager
-A small project showcasing masonry layout for managing your day-to-day tasks
+A small project showcasing responsive layout for managing your day-to-day tasks.
 
 ![image](https://github.com/yugs16/task-manager/assets/9073610/4c308cc7-3e60-4aa4-86be-bf75ea4379f3)
 
